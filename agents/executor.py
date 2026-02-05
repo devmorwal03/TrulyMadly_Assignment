@@ -1,5 +1,6 @@
 from tools.github_tool import search_github
 from tools.weather_tool import get_weather
+from tools.news_tool import get_news
 
 def execute_plan(plan):
     results = {}
@@ -12,5 +13,8 @@ def execute_plan(plan):
 
         elif tool == "weather":
             results["weather"] = get_weather(step.get("city"))
+
+        elif tool == "news":
+            results["news"] = get_news(step.get("topic", "technology"))
 
     return results

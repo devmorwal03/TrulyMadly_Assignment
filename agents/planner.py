@@ -59,4 +59,11 @@ User request: {user_query}
             ]
         }
 
+    if "news" in query_lower:
+        return {
+            "steps": [
+                {"tool": "news", "topic": user_query}
+            ]
+        }
+    
     return {"steps": []}
