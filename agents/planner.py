@@ -13,10 +13,12 @@ Do NOT explain.
 Available tools:
 1. github → needs: query
 2. weather → needs: city
+2. news -> needs: topic
 
 Rules:
 - If user asks weather → use weather tool
 - If user asks github/repos/code → use github tool
+- If user asks news -> use news tool
 - Always produce valid JSON
 - Never return empty steps
 
@@ -40,7 +42,7 @@ User request: {user_query}
     except:
         pass
 
-    # 🔥 Fallback rule-based (guaranteed execution)
+    # Fallback rule-based (guaranteed execution)
     query_lower = user_query.lower()
 
     if "weather" in query_lower:
