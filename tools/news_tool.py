@@ -1,24 +1,25 @@
-import os
 import requests
-from dotenv import load_dotenv
+import os
 
-load_dotenv()
+NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 
-def get_news(topic="technology"):
-    key = os.getenv("NEWS_API_KEY")
-    url = (
-        f"https://newsapi.org/v2/everything?"
-        f"q={topic}&sortBy=publishedAt&pageSize=3&apiKey={key}"
-    )
-    res = requests.get(url).json()
+def get_news(topic):
+    url = f"https://newsapi.org/v2/everything?q={topic}&pageSize=3&apiKey={NEWS_API_KEY}"
 
-    articles = []
-    for a in res.get("articles", []):
-        articles.append({
-            "name": a["title"],
-            "source": a["source"]["name"],
-            "description": a["description"],
-            "url": a["url"]
-        })
+    try:
+        response = requests.get(url)
+        data = response.json()
 
-    return articles
+        articles = []
+        for a in data.get("articles", [])[:3]:
+            articles.append({
+                "name": a["title"],
+                "source": a["source"]["name"],
+                "description": a["description"],
+                "url": a["url"]
+            })
+
+        return articles
+
+    except Exception as e:
+        return {"error": str(e)}

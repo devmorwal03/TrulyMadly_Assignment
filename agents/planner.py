@@ -18,7 +18,7 @@ Available tools:
 Rules:
 - If user asks weather → use weather tool
 - If user asks github/repos/code → use github tool
-- If user asks news -> use news tool
+-> If user aks news → get news by topic (needs "topic")
 - Always produce valid JSON
 - Never return empty steps
 

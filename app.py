@@ -3,7 +3,7 @@ from agents.planner import create_plan
 from agents.executor import execute_plan
 from agents.verifier import verify
 
-st.title("🤖 AI Ops Assistant")
+st.title("AI Ops Assistant")
 
 query = st.text_input("Enter your request")
 
