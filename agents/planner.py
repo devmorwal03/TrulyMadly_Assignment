@@ -18,7 +18,7 @@ Available tools:
 Rules:
 - If user asks weather → use weather tool
 - If user asks github/repos/code → use github tool
--> If user aks news → get news by topic (needs "topic")
+- If user aks news → get news by topic (needs "topic")
 - Always produce valid JSON
 - Never return empty steps
 
@@ -33,7 +33,6 @@ User request: {user_query}
 """
 
     response = call_llm(prompt)
-
     # Try parsing LLM JSON
     try:
         plan = json.loads(response)
@@ -43,29 +42,4 @@ User request: {user_query}
         pass
 
     # Fallback rule-based (guaranteed execution)
-    query_lower = user_query.lower()
-
-    if "weather" in query_lower:
-        words = user_query.split()
-        city = words[-1]
-        return {
-            "steps": [
-                {"tool": "weather", "city": city}
-            ]
-        }
-
-    if "github" in query_lower or "repo" in query_lower:
-        return {
-            "steps": [
-                {"tool": "github", "query": user_query}
-            ]
-        }
-
-    if "news" in query_lower:
-        return {
-            "steps": [
-                {"tool": "news", "topic": user_query}
-            ]
-        }
-    
     return {"steps": []}

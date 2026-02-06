@@ -9,7 +9,7 @@ query = st.text_input("Enter your request")
 
 if st.button("Run"):
     plan = create_plan(query)
-    st.subheader("📋 Plan")
+    st.subheader(" Plan")
     st.json(plan)
 
     results = execute_plan(plan)
